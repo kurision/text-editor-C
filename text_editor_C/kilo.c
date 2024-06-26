@@ -9,9 +9,7 @@ void disableRawMode(){
 void enableRawMode(){
 	tcgetattr(STDIN_FILENO,&orig_termios);
 
-	struct termios raw;
-	tcgetattr(STDIN_FILENO,&raw);
-	
+	struct termios raw=orig_termios;
 	raw.c_lflag &= ~(ECHO);
 	
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
