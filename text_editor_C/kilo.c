@@ -23,10 +23,10 @@ void enableRawMode(){
 	if(tcgetattr(STDIN_FILENO,&orig_termios)== -1) die("tcgetattr");
 	atexit(disableRawMode);
 	struct termios raw=orig_termios;
-	rwa.c_iflags &=~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
-	raw.c_ifflag &=~(ICRNL | IXON);
-	raw.c_oflags &=~(OPOST);
-	raw.c_oflags &=~(CS8);
+	raw.c_iflag &=~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
+	raw.c_iflag &=~(ICRNL | IXON);
+	raw.c_oflag &=~(OPOST);
+	raw.c_oflag &=~(CS8);
 	raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
 	raw.c_cc[VMIN]=0;
 	raw.c_cc[VTIME]=1;
