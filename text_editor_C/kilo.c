@@ -8,13 +8,13 @@
 #include <sys/ioctl.h>
 
 /***defines */
-#define CTRL_KEY(k) ((k) & 0x1f)
+#define CTRL_KEY(k) ((k) & 0x1f);
 /***data */
 struct editorConfig(){
 	int screenrows;
 	int screencols;
 	struct termios orig_termios;
-}
+};
 struct editorConfig E;
 
 /*** terminal */
