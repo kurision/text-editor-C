@@ -14,7 +14,7 @@ struct editorConfig(){
 	int screenrows;
 	int screencols;
 	struct termios orig_termios;
-};
+}
 struct editorConfig E;
 
 /*** terminal */
@@ -64,7 +64,7 @@ int getCursorPosition(int *rows,int *cols){
 		if(iscntrl(c)){
 			printf("%d\r\n",c);
 		}else{
-			printf("%d ('%c')\r\n");
+			printf("%d ('%c')\r\n",c,c);
 		}
 
 	}
@@ -78,7 +78,7 @@ int getWindowSize(int *rows,int *cols){
 		return getCursorPosition(rows,cols);
 	}else{
 		*cols= ws.ws_col;
-		*rows = ws.ws_rows;
+		*rows = ws.ws_row;
 		return 0;
 	}
 }
