@@ -13,6 +13,8 @@ struct termios orig_termios;
 
 /*** terminal */
 void die(const char *s){
+	write(STDIN_FILENO,"\x1n[2J",4);
+	write(STDIN_FILENO,"\x1b[H",3);
 	perror(s);
 	exit(1);
 }
@@ -47,16 +49,37 @@ char editorReadKey(){
 	return c;
 }
 
+/***output */
+
+void editorDrawRows(){
+	int y;
+	for(y=0;y<24;y++){
+		write(STDIN_FILENO,"~\r\n",3);
+	}
+}
+
+void editorRefreshscreen(){
+	write(STDIN_FILENO,"\x1n[2J",4);
+	write(STDIN_FILENO,"\x1b[H",3);
+
+	editorDrawRows();
+	write(STDIN_FILENO,"\x1b[H",3);
+}
+/***input */
 void editorProcessKeypress(){
 	char c = editorReadKey();
 	switch(c){
 		case CTRL_KEY('q'):
+			write(STDIN_FILENO,"\x1n[2J",4);
+			write(STDIN_FILENO,"\x1b[H",3);
 			exit(0);
 			break;
 	}
 }
 
 /***init */
+
+
 int main(){
 	enableRawMode();
 	
