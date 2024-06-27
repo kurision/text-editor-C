@@ -10,11 +10,11 @@
 /***defines */
 #define CTRL_KEY(k) ((k) & 0x1f)
 /***data */
-struct editorConfig(){
+struct editorConfig{
 	int screenrows;
 	int screencols;
 	struct termios orig_termios;
-}
+};
 struct editorConfig E;
 
 /*** terminal */
@@ -87,7 +87,7 @@ int getWindowSize(int *rows,int *cols){
 
 void editorDrawRows(){
 	int y;
-	for(y=0;y<E.screeenrows;y++){
+	for(y=0;y<E.screenrows;y++){
 		write(STDIN_FILENO,"~\r\n",3);
 	}
 }
